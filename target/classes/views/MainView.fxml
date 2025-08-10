@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.MainController"
+            stylesheets="/styles/styles.css"
+            prefHeight="600.0" prefWidth="900.0">
+    
+    <!-- Top Navigation Bar -->
+    <top>
+        <VBox spacing="0" styleClass="nav-container">
+            <!-- Header with app title and user info -->
+            <HBox styleClass="header-section">
+                <Label text="GreenCompost Connect" styleClass="app-title"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="userLabel" text="Welcome, User!" styleClass="user-label"/>
+                <Button fx:id="logoutButton" text="Logout" onAction="#handleLogout" styleClass="logout-button" />
+            </HBox>
+            
+            <!-- Main Navigation Bar with Dropdown Menus -->
+            <HBox styleClass="main-navbar">
+                <!-- Dashboard Button -->
+                <Button fx:id="dashboardBtn" text="Dashboard" onAction="#switchToDashboard" styleClass="nav-button-main"/>
+                
+                <!-- Food Management Dropdown -->
+                <MenuButton fx:id="foodManagementMenu" text="Food Management" styleClass="nav-menu-button">
+                    <items>
+                        <MenuItem fx:id="logFoodBtn" text="Log Food" onAction="#switchToLogFood" styleClass="nav-menu-item"/>
+                        <MenuItem fx:id="itemsBtn" text="My Items" onAction="#switchToItems" styleClass="nav-menu-item"/>
+                        <MenuItem fx:id="statsBtn" text="Statistics" onAction="#switchToStats" styleClass="nav-menu-item"/>
+                    </items>
+                </MenuButton>
+                
+                <!-- Services Dropdown -->
+                <MenuButton fx:id="servicesMenu" text="Services" styleClass="nav-menu-button">
+                    <items>
+                        <MenuItem fx:id="findServicesBtn" text="Advanced Search" onAction="#switchToFindServices" styleClass="nav-menu-item"/>
+                        <MenuItem fx:id="findNearbyServicesBtn" text="Find Nearby Services" onAction="#switchToFindNearbyServices" styleClass="nav-menu-item"/>
+                    </items>
+                </MenuButton>
+                
+                <!-- Food Waste Solutions Dropdown -->
+                <MenuButton fx:id="solutionsMenu" text="Food Waste Solutions" styleClass="nav-menu-button">
+                    <items>
+                        <MenuItem fx:id="donateBtn" text="Donate Food" onAction="#switchToDonate" styleClass="nav-menu-item"/>
+                        <MenuItem fx:id="compostBtn" text="Compost Waste" onAction="#switchToCompost" styleClass="nav-menu-item"/>
+                    </items>
+                </MenuButton>
+                
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Center Content Area -->
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Dashboard View (default) -->
+            <VBox fx:id="dashboardView" styleClass="dashboard-view">
+                <HBox spacing="20" alignment="CENTER_LEFT">
+                    <VBox styleClass="stat-card">
+                        <Label text="Total Items" styleClass="stat-title"/>
+                        <Label fx:id="totalItemsLabel" text="0" styleClass="stat-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card">
+                        <Label text="Expiring Soon" styleClass="stat-title"/>
+                        <Label fx:id="expiringSoonLabel" text="0" styleClass="stat-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card">
+                        <Label text="Nearby Services" styleClass="stat-title"/>
+                        <Label fx:id="nearbyServicesLabel" text="0" styleClass="stat-value"/>
+                    </VBox>
+                </HBox>
+                
+                <VBox styleClass="food-list-section">
+                    <Label text="Items Expiring Soon" styleClass="section-title"/>
+                    <TableView fx:id="expiringSoonTable">
+                        <columns>
+                            <TableColumn fx:id="itemNameColumn" text="Item" />
+                            <TableColumn fx:id="quantityColumn" text="Quantity" />
+                            <TableColumn fx:id="expiryColumn" text="Expires In" />
+                            <TableColumn fx:id="recommendationColumn" text="Recommendation" />
+                        </columns>
+                    </TableView>
+                </VBox>
+                
+                <VBox styleClass="service-section">
+                    <Label text="Recommended Services" styleClass="section-title"/>
+                    <TableView fx:id="servicesTable">
+                        <columns>
+                            <TableColumn fx:id="serviceNameColumn" text="Service" />
+                            <TableColumn fx:id="serviceTypeColumn" text="Type" />
+                            <TableColumn fx:id="distanceColumn" text="Distance" />
+                            <TableColumn fx:id="hoursColumn" text="Hours" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </StackPane>
+    </center>
+    
+    <!-- Bottom Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar">
+            <Label fx:id="statusLabel" text="Ready" />
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

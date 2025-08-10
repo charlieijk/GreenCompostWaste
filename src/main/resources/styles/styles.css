@@ -1,0 +1,458 @@
+/* Main Application Styles */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f9f9f9;
+    
+    /* Define modern color scheme - using both -gc and -fx prefixes for compatibility */
+    /* Colors with -fx prefix (preferred in JavaFX) */
+    -fx-primary-color: #2e7d32; /* Dark green */
+    -fx-primary-light-color: #60ad5e; /* Light green */
+    -fx-primary-dark-color: #005005; /* Darker green */
+    -fx-accent-color: #ff6f00; /* Orange */
+    -fx-text-primary-color: #212121;
+    -fx-text-secondary-color: #757575;
+    -fx-divider-color: #e0e0e0;
+    -fx-background-color: #f9f9f9;
+    -fx-card-color: white;
+    -fx-error-color: #d32f2f;
+    -fx-warning-color: #f57c00;
+    -fx-success-color: #388e3c;
+    -fx-info-color: #0277bd;
+    
+    /* Subtle shadows */
+    -fx-card-shadow: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 8, 0, 0, 2);
+    -fx-button-shadow: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 1);
+    -fx-navbar-shadow: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+    
+    /* Border radius for components */
+    -fx-border-radius-sm: 3px;
+    -fx-border-radius-md: 6px;
+    -fx-border-radius-lg: 10px;
+}
+
+/* Color variables defined at root level for global accessibility */
+* {
+    /* Maintain compatibility with existing code */
+    -gc-primary: #2e7d32; 
+    -gc-primary-light: #60ad5e;
+    -gc-primary-dark: #005005;
+    -gc-accent: #ff6f00;
+    -gc-text-primary: #212121;
+    -gc-text-secondary: #757575;
+    -gc-divider: #e0e0e0;
+    -gc-background: #f9f9f9;
+    -gc-card: white;
+    -gc-error: #d32f2f;
+    -gc-warning: #f57c00;
+    -gc-success: #388e3c;
+    -gc-info: #0277bd;
+}
+
+/* Navigation Container */
+.nav-container {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+    -fx-background-color: #005005; /* Primary dark color */
+}
+
+/* Header Styles */
+.header-section {
+    -fx-background-color: #005005; /* Primary dark color */
+    -fx-padding: 15px 24px;
+    -fx-alignment: center-left;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.user-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-padding: 0 20px 0 0;
+}
+
+.logout-button {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-padding: 6px 16px;
+    -fx-effect: -fx-button-shadow;
+}
+
+.logout-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.logout-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.2), 1, 0, 0, 1);
+}
+
+/* Main Navbar Styles */
+.main-navbar {
+    -fx-background-color: #2e7d32; /* Primary color */
+    -fx-padding: 0 0 0 24px;
+    -fx-spacing: 8px;
+    -fx-alignment: center-left;
+    -fx-min-height: 50px;
+    -fx-pref-height: 50px;
+}
+
+/* Main navigation button style (for Dashboard) */
+.nav-button-main {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-padding: 0 20px;
+    -fx-min-height: 50px;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.nav-button-main:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.3) transparent;
+}
+
+.nav-button-main:pressed {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown menu button styles */
+.nav-menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-padding: 0 20px;
+    -fx-min-height: 50px;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: transparent;
+    -fx-mark-color: rgba(255, 255, 255, 0.8); /* Arrow color */
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.nav-menu-button > .label {
+    -fx-text-fill: white;
+}
+
+.nav-menu-button .arrow-button {
+    -fx-padding: 0 5px 0 8px;
+}
+
+.nav-menu-button .arrow-button .arrow {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-shape: "M0 0 L10 0 L5 7 z";
+    -fx-scale-x: 0.7;
+    -fx-scale-y: 0.7;
+}
+
+.nav-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.3) transparent;
+}
+
+.nav-menu-button:hover .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.nav-menu-button:showing { /* When dropdown is open */
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: transparent transparent #ff6f00 transparent; /* Accent color */
+}
+
+/* Menu items in dropdown */
+.menu-item {
+    -fx-padding: 10px 20px;
+}
+
+.menu-item > .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #212121; /* Text primary color */
+}
+
+.menu-item:focused {
+    -fx-background-color: #60ad5e; /* Primary light color */
+}
+
+.menu-item:focused > .label {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+}
+
+/* Context menu (dropdown) styling */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 8px 8px;
+    -fx-border-color: -gc-divider;
+    -fx-border-width: 0 1px 1px 1px;
+    -fx-border-radius: 0 0 8px 8px;
+    -fx-padding: 5px 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5);
+}
+
+/* Active navigation button/menu style */
+.active-nav-button {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: transparent transparent #ff6f00 transparent; /* Accent color */
+    -fx-border-width: 0 0 3 0;
+    -fx-font-weight: bold;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 1, 0, 0, 1);
+}
+
+/* Common Components */
+.view-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -gc-primary-dark;
+    -fx-padding: 0 0 10px 0;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -gc-primary;
+    -fx-padding: 10px 0 5px 0;
+}
+
+.button {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: -gc-text-primary;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.primary-button {
+    -fx-background-color: -gc-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.primary-button:hover {
+    -fx-background-color: -gc-primary-dark;
+}
+
+.action-button {
+    -fx-background-color: -gc-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.action-button:hover {
+    -fx-background-color: derive(-gc-accent, -10%);
+}
+
+.secondary-button {
+    -fx-background-color: #60ad5e; /* Primary light color */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.secondary-button:hover {
+    -fx-background-color: derive(#60ad5e, -10%);
+}
+
+/* Dashboard Components */
+.dashboard-view {
+    -fx-spacing: 24;
+    -fx-padding: 24;
+}
+
+.stat-card {
+    -fx-background-color: white; /* Card color */
+    -fx-padding: 18px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 8, 0, 0, 2);
+    -fx-min-width: 160px;
+    -fx-max-width: 250px;
+    -fx-alignment: center;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-border-color: #e0e0e0; /* Divider color */
+}
+
+.stat-title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #757575; /* Text secondary color */
+    -fx-font-weight: normal;
+    -fx-padding: 0 0 5 0;
+}
+
+.stat-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32; /* Primary color */
+}
+
+.food-list-section, .service-section {
+    -fx-spacing: 12;
+    -fx-background-color: white; /* Card color */
+    -fx-padding: 20px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 8, 0, 0, 2);
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-border-color: #e0e0e0; /* Divider color */
+}
+
+/* Table Styles */
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -gc-primary-light;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -gc-divider;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+}
+
+/* Detail Views */
+.detail-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -gc-text-primary;
+}
+
+.item-details-pane, .service-details-pane {
+    -fx-background-color: -gc-card;
+    -fx-padding: 15px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+.no-selection-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: -gc-text-secondary;
+    -fx-font-style: italic;
+}
+
+.days-left {
+    -fx-font-weight: bold;
+}
+
+/* Status indicators */
+.status-warning {
+    -fx-text-fill: -gc-warning;
+    -fx-font-weight: bold;
+}
+
+.status-expired {
+    -fx-text-fill: -gc-error;
+    -fx-font-weight: bold;
+}
+
+.status-good {
+    -fx-text-fill: -gc-success;
+    -fx-font-weight: bold;
+}
+
+.recommendation {
+    -fx-font-style: italic;
+    -fx-text-fill: -gc-primary;
+}
+
+/* Status Bar */
+.status-bar {
+    -fx-background-color: -gc-primary-light;
+    -fx-padding: 5px;
+}
+
+.status-bar .label {
+    -fx-text-fill: white;
+}
+
+/* Success Pane */
+.success-pane {
+    -fx-background-color: -gc-success;
+    -fx-padding: 15px;
+    -fx-background-radius: 5px;
+}
+
+.success-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.success-pane .label {
+    -fx-text-fill: white;
+}
+
+.recommendation-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Chart Styles */
+.chart-container {
+    -fx-background-color: -gc-card;
+    -fx-padding: 15px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+.chart-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -gc-primary;
+}
+
+.default-color0.chart-pie { -fx-pie-color: -gc-primary; }
+.default-color1.chart-pie { -fx-pie-color: -gc-primary-light; }
+.default-color2.chart-pie { -fx-pie-color: -gc-primary-dark; }
+.default-color3.chart-pie { -fx-pie-color: -gc-accent; }
+.default-color4.chart-pie { -fx-pie-color: derive(-gc-accent, -20%); }
+.default-color5.chart-pie { -fx-pie-color: derive(-gc-primary-light, 30%); }
+.default-color6.chart-pie { -fx-pie-color: derive(-gc-primary-dark, 40%); }
+
+.default-color0.chart-bar { -fx-bar-fill: -gc-primary; }
+.default-color1.chart-bar { -fx-bar-fill: -gc-primary-light; }
+.default-color2.chart-bar { -fx-bar-fill: -gc-accent; }
+
+.metric-card {
+    -fx-background-color: -gc-card;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+}
+
+.metric-title {
+    -fx-font-size: 14px;
+    -fx-text-fill: -gc-text-secondary;
+}
+
+.metric-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -gc-primary;
+}

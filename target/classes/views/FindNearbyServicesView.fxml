@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.FindNearbyServicesController"
+      styleClass="find-nearby-services-view"
+      spacing="15">
+      
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+    </padding>
+    
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Find Nearby Services" styleClass="view-title"/>
+        <Region HBox.hgrow="ALWAYS" />
+        
+        <Label text="Search radius:" />
+        <Slider fx:id="radiusSlider" min="1" max="50" value="10" 
+               showTickLabels="true" showTickMarks="true" 
+               majorTickUnit="10" minorTickCount="4" 
+               prefWidth="200" />
+        <Label fx:id="radiusLabel" text="10 km" prefWidth="50" />
+        
+        <Button fx:id="searchButton" text="Search" 
+               styleClass="primary-button" defaultButton="true" 
+               onAction="#handleSearch" />
+    </HBox>
+    
+    <HBox spacing="10">
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Filter by type:" />
+            <HBox spacing="10">
+                <CheckBox fx:id="foodBankCheck" text="Food Banks" selected="true" />
+                <CheckBox fx:id="compostCheck" text="Composting Facilities" selected="true" />
+                <CheckBox fx:id="gardenCheck" text="Community Gardens" selected="true" />
+                <CheckBox fx:id="farmCheck" text="Urban Farms" selected="true" />
+                <CheckBox fx:id="restaurantCheck" text="Restaurants" selected="true" />
+                <CheckBox fx:id="fridgeCheck" text="Community Fridges" selected="true" />
+                <Region HBox.hgrow="ALWAYS" />
+                <CheckBox fx:id="showAllCheck" text="Show services from all locations" selected="false" />
+            </HBox>
+        </VBox>
+    </HBox>
+    
+    <SplitPane dividerPositions="0.6" VBox.vgrow="ALWAYS">
+        <!-- Left side: Table of services -->
+        <VBox spacing="10">
+            <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="150">
+                        <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="150" />
+                    <TableColumn fx:id="addressColumn" text="Address" prefWidth="200">
+                        <cellValueFactory><PropertyValueFactory property="address" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="distanceColumn" text="Distance" prefWidth="80" />
+                </columns>
+            </TableView>
+            <Label fx:id="resultsLabel" text="0 services found" />
+        </VBox>
+        
+        <!-- Right side: Selected service details -->
+        <VBox spacing="10" styleClass="service-details-pane">
+            <Label text="Service Details" styleClass="section-title"/>
+            
+            <GridPane fx:id="detailsPane" hgap="10" vgap="10" visible="false">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="150" />
+                </columnConstraints>
+                
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="detail-label" />
+                <Label fx:id="serviceNameLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="detail-label" />
+                <Label fx:id="serviceTypeLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                
+                <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="detail-label" />
+                <Label fx:id="addressLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                
+                <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="detail-label" />
+                <Label fx:id="contactLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                
+                <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="detail-label" />
+                <Label fx:id="distanceLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                
+                <Label text="Pickup available:" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="detail-label" />
+                <Label fx:id="pickupLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                
+                <Label text="Operating Hours:" GridPane.columnIndex="0" GridPane.rowIndex="6" 
+                      styleClass="detail-label" />
+                <VBox fx:id="hoursPane" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="7" 
+                     GridPane.columnSpan="2" styleClass="hours-pane" />
+            </GridPane>
+            
+            <VBox fx:id="noSelectionPane" alignment="CENTER" VBox.vgrow="ALWAYS" visible="true">
+                <Label text="Select a service to view details" styleClass="no-selection-label" />
+            </VBox>
+        </VBox>
+    </SplitPane>
+</VBox>

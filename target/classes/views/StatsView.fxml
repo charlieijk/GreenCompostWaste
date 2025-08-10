@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.StatsController"
+      styleClass="stats-view"
+      stylesheets="/styles/styles.css"
+      spacing="15">
+      
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+    </padding>
+    
+    <Label text="Food Waste Statistics" styleClass="view-title"/>
+    
+    <!-- Charts and Metrics Row -->
+    <HBox spacing="20">
+        <!-- Pie chart for food categories -->
+        <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+            <Label text="Food Categories" styleClass="chart-title"/>
+            <PieChart fx:id="categoryChart" legendVisible="true" 
+                     title="" VBox.vgrow="ALWAYS" />
+        </VBox>
+        
+        <!-- Bar chart for expiry timeline -->
+        <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+            <Label text="Expiry Timeline" styleClass="chart-title"/>
+            <BarChart fx:id="expiryChart" title="" 
+                     legendVisible="false" VBox.vgrow="ALWAYS">
+                <xAxis>
+                    <CategoryAxis label="Timeline" fx:id="expiryXAxis" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Items" fx:id="expiryYAxis" />
+                </yAxis>
+            </BarChart>
+        </VBox>
+    </HBox>
+    
+    <!-- Summary Metrics -->
+    <TitledPane text="Summary Metrics" collapsible="false">
+        <GridPane hgap="20" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="150" prefWidth="200" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="150" prefWidth="200" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="150" prefWidth="200" />
+            </columnConstraints>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Total Items" styleClass="metric-title"/>
+                <Label fx:id="totalItemsLabel" text="0" styleClass="metric-value"/>
+            </VBox>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Total Weight" styleClass="metric-title"/>
+                <Label fx:id="totalWeightLabel" text="0 kg" styleClass="metric-value"/>
+            </VBox>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <Label text="Average Item Age" styleClass="metric-title"/>
+                <Label fx:id="avgAgeLabel" text="0 days" styleClass="metric-value"/>
+            </VBox>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Expiring Soon" styleClass="metric-title"/>
+                <Label fx:id="expiringSoonLabel" text="0" styleClass="metric-value"/>
+            </VBox>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Items Donated" styleClass="metric-title"/>
+                <Label fx:id="donatedLabel" text="0" styleClass="metric-value"/>
+            </VBox>
+            
+            <VBox styleClass="metric-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label text="Items Composted" styleClass="metric-title"/>
+                <Label fx:id="compostedLabel" text="0" styleClass="metric-value"/>
+            </VBox>
+        </GridPane>
+    </TitledPane>
+    
+    <!-- Detailed Stats Table -->
+    <TitledPane text="Detailed Statistics by Category" expanded="false">
+        <TableView fx:id="statsTable">
+            <columns>
+                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120" />
+                <TableColumn fx:id="countColumn" text="Item Count" prefWidth="100" />
+                <TableColumn fx:id="weightColumn" text="Total Weight" prefWidth="100" />
+                <TableColumn fx:id="avgExpiryColumn" text="Avg Days Until Expiry" prefWidth="150" />
+                <TableColumn fx:id="percentColumn" text="Percent of Total" prefWidth="100" />
+            </columns>
+        </TableView>
+    </TitledPane>
+    
+    <!-- Export Options -->
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="exportCsvButton" text="Export CSV" onAction="#handleExportCsv" />
+        <Button fx:id="printButton" text="Print Report" onAction="#handlePrint" />
+    </HBox>
+</VBox>

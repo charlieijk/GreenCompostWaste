@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-container">
+         
+         <!-- Login Form -->
+         <VBox fx:id="loginPane" alignment="CENTER" spacing="15.0">
+            <children>
+               <Label styleClass="page-title" text="GreenCompost Connect">
+                  <font>
+                     <Font name="System Bold" size="24.0" />
+                  </font>
+               </Label>
+               <Label styleClass="login-subtitle" text="Login to your account">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+               
+               <TextField fx:id="usernameField" promptText="Username" styleClass="login-field">
+                  <VBox.margin>
+                     <Insets top="15.0" />
+                  </VBox.margin>
+               </TextField>
+               
+               <HBox spacing="5.0">
+                  <children>
+                     <PasswordField fx:id="passwordField" promptText="Password" styleClass="login-field" HBox.hgrow="ALWAYS" />
+                     <TextField fx:id="passwordTextField" promptText="Password" styleClass="login-field" visible="false" HBox.hgrow="ALWAYS" />
+                     <Button fx:id="togglePasswordButton" mnemonicParsing="false" onAction="#togglePasswordVisibility" styleClass="icon-button" text="👁" />
+                  </children>
+               </HBox>
+               
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                     <CheckBox fx:id="rememberMeCheckbox" text="Remember me" />
+                  </children>
+               </HBox>
+               
+               <Button fx:id="loginButton" defaultButton="true" onAction="#handleLogin" prefWidth="200.0" styleClass="primary-button" text="Log In">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </Button>
+               
+               <HBox alignment="CENTER">
+                  <children>
+                     <Label text="Don't have an account? " />
+                     <Button fx:id="registerButton" onAction="#switchToRegister" styleClass="link-button" text="Register" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="15.0" />
+                  </VBox.margin>
+               </HBox>
+               
+               <HBox alignment="CENTER">
+                  <children>
+                     <Label text="Forgot password? " />
+                     <Button fx:id="resetPasswordButton" onAction="#showResetPassword" styleClass="link-button" text="Reset Password" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="5.0" />
+                  </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+         
+         <!-- Status Message -->
+         <Label fx:id="statusLabel" alignment="CENTER" styleClass="status-label" textAlignment="CENTER" wrapText="true">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+   </children>
+   
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</StackPane>

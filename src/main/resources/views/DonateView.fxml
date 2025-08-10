@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.DonateController"
+      styleClass="donate-view"
+      stylesheets="/styles/styles.css"
+      spacing="15">
+      
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+    </padding>
+    
+    <Label text="Donate Food to Food Banks" styleClass="view-title"/>
+    
+    <!-- Food Bank Selection Section -->
+    <TitledPane text="Select Food Bank" expanded="true" collapsible="false">
+        <VBox spacing="15">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Your location:" />
+                <Label fx:id="locationLabel" text="Not specified" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Use current location" onAction="#handleUseCurrentLocation" 
+                       styleClass="secondary-button" />
+            </HBox>
+        
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Select food bank:" />
+                <ComboBox fx:id="foodBankComboBox" prefWidth="300" />
+                <Button text="Find nearest" onAction="#handleFindNearest" 
+                       styleClass="secondary-button" />
+            </HBox>
+            
+            <TitledPane text="Food Bank Details" expanded="true">
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="120" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="200" />
+                    </columnConstraints>
+                    
+                    <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="detail-label" />
+                    <Label fx:id="nameLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    
+                    <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="detail-label" />
+                    <Label fx:id="addressLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" wrapText="true" />
+                    
+                    <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="detail-label" />
+                    <Label fx:id="contactLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    
+                    <Label text="Distance:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="detail-label" />
+                    <Label fx:id="distanceLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    
+                    <Label text="Hours:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="detail-label" />
+                    <VBox fx:id="hoursPane" spacing="2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    
+                    <Label text="Donation Guidelines:" GridPane.columnIndex="0" GridPane.rowIndex="5" 
+                          GridPane.columnSpan="2" styleClass="detail-label" />
+                    <ListView fx:id="guidelinesList" prefHeight="80" 
+                             GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" />
+                    
+                    <Label text="Accepted Items:" GridPane.columnIndex="0" GridPane.rowIndex="7" 
+                          GridPane.columnSpan="2" styleClass="detail-label" />
+                    <ListView fx:id="acceptedItemsList" prefHeight="80" 
+                             GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" />
+                    
+                    <HBox spacing="10" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="9" 
+                         GridPane.columnSpan="2">
+                        <Button text="Get Directions" onAction="#handleGetDirections" 
+                               styleClass="action-button" />
+                        <Button text="Contact" onAction="#handleContactFoodBank" 
+                               styleClass="action-button" />
+                    </HBox>
+                </GridPane>
+            </TitledPane>
+        </VBox>
+    </TitledPane>
+    
+    <!-- Food Donation Selection Section -->
+    <TitledPane text="Select Food to Donate" expanded="true" collapsible="false">
+        <VBox spacing="15">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Select from your food items:" />
+                <Region HBox.hgrow="ALWAYS" />
+                <CheckBox fx:id="showOnlyExpiringCheck" text="Show only non-expired items" selected="true" />
+            </HBox>
+            
+            <TableView fx:id="foodItemsTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="selectColumn" text="Select" prefWidth="60" />
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" />
+                    <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100" />
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120" />
+                    <TableColumn fx:id="expiryColumn" text="Expiry Date" prefWidth="120" />
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="100" />
+                </columns>
+            </TableView>
+            
+            <Separator />
+            
+            <HBox spacing="10">
+                <Label text="Add new food item to donate:" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="+ Add New Item" onAction="#handleAddNewItem" styleClass="primary-button" />
+            </HBox>
+            
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="100" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="150" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="100" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="150" />
+                </columnConstraints>
+                
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Label text="Category:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <ComboBox fx:id="categoryComboBox" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                         prefWidth="150" />
+                
+                <Label text="Quantity:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <TextField fx:id="quantityField" prefWidth="100" />
+                    <ComboBox fx:id="unitComboBox" prefWidth="80" />
+                </HBox>
+                
+                <Label text="Expiry Date:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <DatePicker fx:id="expiryDatePicker" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                
+                <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextArea fx:id="notesField" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                         GridPane.columnSpan="3" prefHeight="60" />
+            </GridPane>
+        </VBox>
+    </TitledPane>
+    
+    <!-- Pickup Options Section -->
+    <TitledPane text="Pickup Options" expanded="true" collapsible="false">
+        <VBox spacing="15">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="selfDeliveryRadio" text="I'll deliver myself" 
+                           toggleGroup="$deliveryOptions" selected="true" />
+                <RadioButton fx:id="requestPickupRadio" text="Request pickup service" 
+                           toggleGroup="$deliveryOptions" />
+                <Label fx:id="pickupAvailabilityLabel" text="(Not available for selected food bank)" 
+                      styleClass="status-warning" visible="false" />
+            </HBox>
+            
+            <GridPane fx:id="pickupDetailsPane" hgap="10" vgap="10" visible="false">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="120" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="200" />
+                </columnConstraints>
+                
+                <Label text="Pickup Address:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Label text="Preferred Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <DatePicker fx:id="pickupDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                
+                <Label text="Preferred Time:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ComboBox fx:id="timeSlotComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                
+                <Label text="Special Instructions:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextArea fx:id="instructionsField" GridPane.columnIndex="1" GridPane.rowIndex="3" 
+                         prefHeight="60" />
+            </GridPane>
+        </VBox>
+    </TitledPane>
+    
+    <!-- Confirmation Section -->
+    <HBox alignment="CENTER" spacing="15">
+        <Button text="Cancel" onAction="#handleCancel" styleClass="secondary-button" />
+        <Button text="Preview Donation" onAction="#handlePreviewDonation" styleClass="primary-button" />
+        <Button fx:id="confirmButton" text="Confirm Donation" onAction="#handleConfirmDonation" 
+               styleClass="action-button" disable="true" />
+    </HBox>
+    
+    <!-- Preview Pane (Hidden by default) -->
+    <TitledPane fx:id="previewPane" text="Donation Preview" expanded="true" visible="false">
+        <VBox spacing="10">
+            <Label text="Your donation to:" styleClass="detail-label" />
+            <Label fx:id="previewFoodBankLabel" text="" />
+            
+            <Label text="Items to donate:" styleClass="detail-label" />
+            <ListView fx:id="previewItemsList" prefHeight="120" />
+            
+            <Label text="Delivery method:" styleClass="detail-label" />
+            <Label fx:id="previewDeliveryLabel" text="" />
+            
+            <Label text="Pickup details:" styleClass="detail-label" fx:id="previewPickupHeaderLabel" visible="false" />
+            <GridPane fx:id="previewPickupDetails" hgap="10" vgap="5" visible="false">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="120" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="200" />
+                </columnConstraints>
+                
+                <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="previewAddressLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Label text="Date/Time:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="previewDateTimeLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                
+                <Label text="Instructions:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="previewInstructionsLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" wrapText="true" />
+            </GridPane>
+        </VBox>
+    </TitledPane>
+    
+    <!-- Success Message (Hidden by default) -->
+    <VBox fx:id="successPane" styleClass="success-pane" visible="false" spacing="10">
+        <Label text="Donation Successfully Scheduled!" styleClass="success-title" />
+        <Label fx:id="successDetailsLabel" text="" />
+        <Label text="Thank you for your contribution to reducing food waste and helping those in need." />
+        <HBox alignment="CENTER">
+            <Button text="Return to Dashboard" onAction="#handleReturnToDashboard" styleClass="primary-button" />
+        </HBox>
+    </VBox>
+</VBox>
