@@ -4,8 +4,8 @@ module GreenCompostWaste {
     requires javafx.graphics;
     requires javafx.base;
     requires java.sql;
-    requires org.slf4j;
     requires java.base;
+    requires org.xerial.sqlitejdbc;
     
     opens controllers to javafx.fxml;
     opens views to javafx.fxml;

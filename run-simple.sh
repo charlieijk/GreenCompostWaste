@@ -5,24 +5,15 @@
 # JavaFX version to use
 JAVAFX_VERSION="21.0.2"
 
-# Check if JavaFX SDK path is set
-if [ -z "$JAVAFX_HOME" ]; then
-  # Use the bundled JavaFX SDK
-  if [ -d "$(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}" ]; then
-    echo "Using the bundled JavaFX SDK"
-    export JAVAFX_HOME="$(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}"
-  else
-    echo "ERROR: JavaFX SDK not found at $(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}"
-    echo "Please run the script from the project root directory."
-    exit 1
-  fi
-fi
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
 
-echo "Using JavaFX from: $JAVAFX_HOME"
+. "$SCRIPT_DIR/scripts/javafx-env.sh"
+ensure_javafx_home "$JAVAFX_VERSION" "$SCRIPT_DIR" || exit 1
 
 # Define class paths
 JAVAFX_CLASSPATH="$JAVAFX_HOME/lib/*"
-SQLITE_CLASSPATH="$(pwd)/sqlite-jdbc.jar"
+SQLITE_CLASSPATH="$SCRIPT_DIR/sqlite-jdbc.jar"
 
 # Clean temp_build directory
 echo "Cleaning temp_build directory..."
@@ -79,8 +70,7 @@ fi
 
 # Run the application
 echo "Running GreenCompostWaste..."
-java -Dprism.order=sw \
-     --module-path "$JAVAFX_HOME/lib" \
+java --module-path "$JAVAFX_HOME/lib" \
      --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base,java.sql \
      -cp "temp_build/bin:$JAVAFX_CLASSPATH:$SQLITE_CLASSPATH" \
      --add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED \

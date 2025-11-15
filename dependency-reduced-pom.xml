@@ -78,9 +78,9 @@
     </plugins>
   </build>
   <properties>
-    <maven.compiler.target>23</maven.compiler.target>
+    <maven.compiler.target>21</maven.compiler.target>
     <mainClass>com.greencompost.main.Main</mainClass>
-    <maven.compiler.source>23</maven.compiler.source>
+    <maven.compiler.source>21</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javafx.version>21.0.2</javafx.version>
     <javafx.sdk.path>${project.basedir}/javafx/javafx-sdk-21.0.2</javafx.sdk.path>

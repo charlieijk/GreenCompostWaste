@@ -5,20 +5,22 @@
 # JavaFX version to use
 JAVAFX_VERSION="21.0.2"
 
-# Check if JavaFX SDK path is set
-if [ -z "$JAVAFX_HOME" ]; then
-  # Use the bundled JavaFX SDK
-  if [ -d "$(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}" ]; then
-    echo "Using the bundled JavaFX SDK"
-    export JAVAFX_HOME="$(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}"
-  else
-    echo "ERROR: JavaFX SDK not found at $(pwd)/javafx/javafx-sdk-${JAVAFX_VERSION}"
-    echo "Please run the script from the project root directory."
-    exit 1
-  fi
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
+
+. "$SCRIPT_DIR/scripts/javafx-env.sh"
+ensure_javafx_home "$JAVAFX_VERSION" "$SCRIPT_DIR" || exit 1
+
+# Ensure SQLite JDBC driver is available
+SQLITE_JAR="$SCRIPT_DIR/sqlite-jdbc.jar"
+if [ ! -f "$SQLITE_JAR" ]; then
+  echo "ERROR: SQLite JDBC driver not found at $SQLITE_JAR"
+  echo "Please run this script from the project root directory."
+  exit 1
 fi
 
-echo "Using JavaFX from: $JAVAFX_HOME"
+# Common module path including JavaFX and SQLite driver
+MODULE_PATH="$JAVAFX_HOME/lib:$SQLITE_JAR"
 
 # Clean bin directory
 echo "Cleaning bin directory..."
@@ -59,8 +61,12 @@ fi
 
 # Compile the project
 echo "Compiling GreenCompostWaste..."
-javac --module-path $JAVAFX_HOME/lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base -d bin $(find src -name "*.java")
+javac --module-path "$MODULE_PATH" \
+      --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base \
+      -d bin $(find src -name "*.java")
 
 # Run the application
 echo "Running GreenCompostWaste..."
-java --module-path $JAVAFX_HOME/lib:bin --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base -m GreenCompostWaste/com.greencompost.main.Main
+java --module-path "bin:$MODULE_PATH" \
+     --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base \
+     -m GreenCompostWaste/com.greencompost.main.Main

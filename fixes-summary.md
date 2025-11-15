@@ -56,6 +56,8 @@ Alternatively, you can download and use JavaFX from the official website:
 3. Set the JAVAFX_HOME environment variable to point to the extracted location
 4. Run the application
 
+> **Apple Silicon note:** The bundled JavaFX SDK in this repository only contains Intel binaries. If you're using an Apple Silicon Mac, install the arm64 build via `brew install openjfx` (or download the aarch64 JavaFX SDK) and set `JAVAFX_HOME` accordingly so the launch scripts can find a compatible toolkit.
+
 ## Configuration for Future Use
 
 To permanently configure JavaFX on your system, add the following to your `~/.zshrc` or `~/.bashrc` file:
