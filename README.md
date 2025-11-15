@@ -76,7 +76,28 @@ mvn clean package
 
 ## Running the Application
 
-There are three ways to run the application:
+### Quick Start (Apple Silicon)
+
+If you're on an Apple Silicon Mac, the bundled JavaFX SDK (`javafx/javafx-sdk-21.0.2`) is Intel-only. Bring your own arm64 build and point the scripts at it:
+
+1. Download the latest macOS/aarch64 JavaFX SDK from [Gluon](https://gluonhq.com/products/javafx/) (for example `openjfx-21.0.2_osx-aarch64_bin-sdk.zip`) and unzip it.
+2. Copy the extracted folder into this repo (or anywhere else on disk) and keep track of the path. A simple option is:
+   ```bash
+   mkdir -p "$REPO_ROOT/javafx"
+   mv ~/Downloads/javafx-sdk-21.0.2 "$REPO_ROOT/javafx/javafx-sdk-21.0.2-aarch64"
+   ```
+3. Run the app by explicitly pointing `JAVAFX_HOME` at that folder:
+   ```bash
+   cd /path/to/GreenCompostWaste
+   JAVAFX_HOME="$PWD/javafx/javafx-sdk-21.0.2-aarch64" ./run-simple.sh
+   ```
+   `run-simple.sh` skips the module system and is the quickest way to confirm the UI loads; once that works you can switch to `./run.sh` or `mvn clean javafx:run` if you want module-aware builds.
+
+The Apple Silicon runtime only needs the `lib` folder, so using the `21.0.2` scripts with a newer JavaFX drop (e.g. 24.x) is fine—just keep the folder name consistent or set `JAVAFX_HOME` before launching.
+
+### Other Run Modes
+
+There are three more ways to run the application:
 
 ### 1. Using the run.sh script (recommended for macOS/Linux)
 

@@ -39,6 +39,7 @@ dependency-reduced-pom.xml
 temp_build/
 
 ### Large SDK files ###
-javafx/javafx-sdk-21.0.2/
+javafx/
+javafx-sdk-*/
 javafx/javafx-sdk.zip
 sqlite-jdbc.jar
