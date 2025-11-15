@@ -337,7 +337,7 @@ public class FindNearbyServicesController implements Initializable {
     
     /**
      * Calculate distance between two points using Haversine formula
-     * 
+     *
      * @deprecated This method is no longer used as we've switched to city-based distance calculation
      * @param lat1 First point latitude
      * @param lon1 First point longitude
@@ -345,6 +345,7 @@ public class FindNearbyServicesController implements Initializable {
      * @param lon2 Second point longitude
      * @return Distance in kilometers
      */
+    @Deprecated
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         final int EARTH_RADIUS = 6371; // in kilometers
         
@@ -620,6 +621,7 @@ public class FindNearbyServicesController implements Initializable {
      * Create sample services data if the database is empty
      * @deprecated This method is replaced by createAllCityServices()
      */
+    @Deprecated
     private void createSampleData() {
         // Redirect to the newer implementation
         createAllCityServices();

@@ -2,6 +2,8 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea/
+*.iml
 
 ### Eclipse ###
 .apt_generated
@@ -27,3 +29,16 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Maven ###
+target/
+dependency-reduced-pom.xml
+*.class
+
+### Temporary build directories ###
+temp_build/
+
+### Large SDK files ###
+javafx/javafx-sdk-21.0.2/
+javafx/javafx-sdk.zip
+sqlite-jdbc.jar
