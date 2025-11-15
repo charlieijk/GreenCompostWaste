@@ -43,3 +43,6 @@ javafx/
 javafx-sdk-*/
 javafx/javafx-sdk.zip
 sqlite-jdbc.jar
+
+### Local data files ###
+greencompost.db
